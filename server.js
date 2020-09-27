@@ -32,8 +32,15 @@ const server = app.listen(port, () => console.log('running on Port', port));
 // eslint-disable-next-line prettier/prettier
 process.on('unhandledRejection', (err) => {
   console.log(err.name, err.message);
-  console.log('unhandledRejection ! shutting down');
+  console.log('UNHANDLED REJECTION💥 shutting down');
   server.close(() => {
     process.exit(1);
+  });
+});
+
+process.on('SIGTERM', () => {
+  console.log('👏 SIGTERM RECEIVED. Shutting down gracefully');
+  server.close(() => {
+    console.log('💥 Process terminated!');
   });
 });
