@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const app = require('./app');
 
+// eslint-disable-next-line prettier/prettier
+process.on('uncaughtException', (err) => {
+  console.log('UNCAUGHT EXCEPTION! Shutting down...');
+  console.log(err.name, err.message);
+  process.exit(1);
+});
+
 dotenv.config({ path: './config.env' });
 // eslint-disable-next-line prettier/prettier
 const DB = process.env.DATABASE.replace(
@@ -20,7 +27,7 @@ mongoose
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log('running on Port', port));
+const server = app.listen(port, () => console.log('running on Port', port));
 
 // eslint-disable-next-line prettier/prettier
 process.on('unhandledRejection', (err) => {

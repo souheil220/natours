@@ -136,17 +136,6 @@ tourSchema.pre('save', function (next) {
   next();
 });
 
-//(*)
-// tourSchema.pre('save', async function (next) {
-//   const guidesPromises = this.guides.map(async (id) => await user.findById(id));
-//   this.guides = await Promise.all(guidesPromises);
-//   next();
-// });
-
-// tourSchema.post(/^find/, function (docs, next) {
-//   console.log();
-// });
-
 //QUERY MIDDLEWARE
 // eslint-disable-next-line prettier/prettier
 tourSchema.pre(/^find/, function (next) {
